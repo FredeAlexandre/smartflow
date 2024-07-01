@@ -35,6 +35,6 @@ bun dev
 
 ## CI/CD
 
-!TODO A CI/CD to verify if coding style is respected format and eslint
+The client frontend is automaticaly updated on each push on the main and visible at [fredealexandre.github.io/smartflow](https://fredealexandre.github.io/smartflow/)
 
-!TODO Create a CI/CD to publish the website to [github pages](https://pages.github.com/)
+!TODO A CI/CD to verify if coding style is respected format and eslint
