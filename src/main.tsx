@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import Dashboard from "./Dashboard.tsx";
 
+import "../app/globals.css"
 import "virtual:uno.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
