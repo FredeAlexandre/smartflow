@@ -1,0 +1,16 @@
+{
+  "name": "smartflow",
+  "private": true,
+  "packageManager": "bun@1.1.8",
+  "workspaces": [
+    "tooling/*"
+  ],
+  "scripts": {
+    "format": "bun --filter '*' format",
+    "format:fix": "bun --filter '*' format -- --write",
+    "lint": "bun --filter '*' lint",
+    "lint:fix": "bun --filter '*' lint -- --fix",
+    "typecheck": "bun --filter '*' typecheck",
+    "lint:ws": "bunx sherif"
+  }
+}
