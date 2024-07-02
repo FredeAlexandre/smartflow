@@ -8,9 +8,7 @@ createJiti(fileURLToPath(import.meta.url))("./src/env");
 const nextConfig = {
   reactStrictMode: true,
 
-  transpilePackages: [
-    "@smartflow/api"
-  ],
+  transpilePackages: ["@smartflow/api"],
 
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: true },

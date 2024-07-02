@@ -1,4 +1,4 @@
-import { server } from "@smartflow/api"
+import { server } from "@smartflow/api";
 
-export const GET = server.handle
-export const POST = server.handle
+export const GET = server.handle;
+export const POST = server.handle;
