@@ -16,6 +16,7 @@ export const env = createEnv({
    */
   server: {
     POSTGRES_URL: z.string().url(),
+    POSTGRES_URL_NON_POOLING: z.string().url(),
   },
 
   /**
