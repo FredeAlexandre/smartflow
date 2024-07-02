@@ -10,4 +10,5 @@ export default [
   ...baseConfig,
   ...reactConfig,
   ...nextjsConfig,
+  ...restrictEnvAccess
 ];
