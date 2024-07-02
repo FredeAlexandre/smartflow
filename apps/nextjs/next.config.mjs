@@ -3,13 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
 
   transpilePackages: [
-    /**
-        "@smartflow/api",
-        "@smartflow/auth",
-        "@smartflow/db",
-        "@smartflow/ui",
-        "@smartflow/validators",
-         */
+    "@smartflow/api"
   ],
 
   eslint: { ignoreDuringBuilds: true },
