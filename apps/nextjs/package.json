@@ -1,0 +1,30 @@
+{
+  "name": "@smartflow/nextjs",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "next build",
+    "clean": "rm -rf .next node_modules next-env.d.ts",
+    "dev": "next dev",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "lint": "eslint",
+    "start": "next start",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "react": "^18",
+    "react-dom": "^18",
+    "next": "14.2.4"
+  },
+  "devDependencies": {
+    "@smartflow/eslint-config": "workspace:*",
+    "@smartflow/prettier-config": "workspace:*",
+    "@smartflow/tailwind-config": "workspace:*",
+    "@smartflow/tsconfig": "workspace:*",
+    "typescript": "^5",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18"
+  },
+  "prettier": "@smartflow/prettier-config"
+}

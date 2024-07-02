@@ -3,9 +3,15 @@
   "private": true,
   "packageManager": "bun@1.1.8",
   "workspaces": [
+    "apps/*",
     "tooling/*"
   ],
   "scripts": {
+    "clean": "bun --filter '*' clean && bun clean:root",
+    "clean:root": "rm -rf node_modules",
+    "dev": "bun --filter '*' dev",
+    "build": "bun --filter '*' build",
+    "start": "bun --filter '*' start",
     "format": "bun --filter '*' format",
     "format:fix": "bun --filter '*' format -- --write",
     "lint": "bun --filter '*' lint",
