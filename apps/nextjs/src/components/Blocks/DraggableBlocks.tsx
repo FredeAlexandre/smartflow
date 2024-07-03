@@ -1,4 +1,4 @@
-import { DraggableIf } from './Blocks/If/DraggableIf';
+import { DraggableIf } from './If/DraggableIf';
 
 export const DraggableBlocks = ({ setTransform }: any) => {
   return (
