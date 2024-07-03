@@ -1,7 +1,10 @@
-function App() {
+import { DragAndDrop } from "./components/DragAndDrop/Main.tsx";
+
+const App = () => {
   return (
     <>
-      <h1 className="text-center text-3xl pt-10">Smartflow</h1>
+      <h1 className="text-center text-3xl pt-10">SmartFlow</h1>
+      <DragAndDrop />
     </>
   );
 }
