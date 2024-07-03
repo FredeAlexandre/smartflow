@@ -33,7 +33,7 @@ export const DraggableIf = ({ id, myTransform, setTransform }: any) => {
       {...listeners}
       {...attributes}
     >
-      IF
+      if
     </button>
   );
 };
