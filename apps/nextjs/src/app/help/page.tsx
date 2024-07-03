@@ -1,8 +1,5 @@
-import { IoIosSettings, IoIosAdd } from "react-icons/io";
-import {Button} from "@/components/ui/button";
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import NavBar from '@/components/ui/navBar';
+import { NavBar } from "~/components/nav-bar"
 
 function Help() {
 

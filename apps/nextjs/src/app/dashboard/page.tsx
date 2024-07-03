@@ -1,9 +1,9 @@
-import { IoIosSettings, IoIosAdd } from "react-icons/io";
-import {Button} from "@/components/ui/button";
+"use client"
+
+import { Icon } from "@iconify/react";
 import React, { useState } from 'react';
-import ProjectBox from '@/components/ui/projectBox';
-import NavBar from '@/components/ui/navBar';
-import nft from './assets/nft-singes.jpg';
+import { NavBar } from "~/components/nav-bar"
+import { ProjectBox } from "./_components/project-box";
 
 function Dashboard() {
 
@@ -34,13 +34,13 @@ function Dashboard() {
         {Array.from({ length: boxProjectCount }).map((_, index) => (
           <ProjectBox 
             key={index} 
-            imageSrc={nft} 
+            imageSrc={"/nft-singes.jpg"} 
             altText="logo-project" 
             title={`NFT Deployment ${index + 1}`} 
           />
         ))}
-        <div className="flex justify-center items-center border-2 rounded-md border-stone-900 w-70 h-50 ml-8 shrink-0">
-          <IoIosAdd className="color-stone-900 w-10 h-10" onClick={addBox}></IoIosAdd>
+        <div className="flex justify-center items-center border-2 rounded-md border-stone-900 w-72 h-52 ml-8 shrink-0">
+          <Icon icon="lucide:plus" className="color-stone-900 w-10 h-10" onClick={addBox}/>
         </div>
       </div>
     </div>
@@ -53,13 +53,13 @@ function Dashboard() {
         {Array.from({ length: boxLibraryCount }).map((_, index) => (
           <ProjectBox 
             key={index} 
-            imageSrc={nft} 
+            imageSrc={"/nft-singes.jpg"} 
             altText="logo-library" 
             title={`NFT Template ${index + 1}`} 
           />
         ))}
-        <div className="flex justify-center items-center border-2 rounded-md border-stone-900 w-70 h-50 ml-8 shrink-0">
-          <IoIosAdd className="color-stone-900 w-10 h-10" onClick={addBoxLibrary}></IoIosAdd>
+        <div className="flex justify-center items-center border-2 rounded-md border-stone-900 w-72 h-52 ml-8 shrink-0">
+          <Icon icon="lucide:plus" className="color-stone-900 w-10 h-10" onClick={addBoxLibrary}/>
         </div>
       </div>
     </div>
