@@ -1,13 +1,17 @@
 import { Button } from "@smartflow/ui/button";
 
+import { Icon } from "@iconify/react";
+
 export default function Home() {
   return (
     <div className=" h-screen w-screen bg-stone-900">
       <div className="flex h-20 w-full items-center bg-stone-900 px-8">
-        <h1 className="text-3xl text-white">Smartflow</h1>
-        <Button className="ml-20 mr-4">Docs</Button>
-        <Button className="mx-4 bg-stone-900">Help</Button>
-        <Button className="mx-4 bg-stone-900">Blog</Button>
+        <h1 className="text-3xl text-white font-bold">Smartflow</h1>
+        <div className="flex gap-6 ml-20">
+          <Button><Icon icon="lucide:home" className="mr-1" /> Home</Button>
+          <Button variant="ghost" className="text-white hover:text-white hover:bg-primary"><Icon icon="lucide:book" className="mr-1" /> Documentation</Button>
+          <Button variant="ghost" className="text-white hover:text-white hover:bg-primary"><Icon icon="lucide:newspaper" className="mr-1" /> Articles</Button>
+        </div>
         <div className="flex h-full w-full items-center justify-end">
           <Button>Sign in</Button>
           <Button className="ml-4" variant="outline">
