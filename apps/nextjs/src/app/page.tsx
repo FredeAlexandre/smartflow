@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Icon } from "@iconify/react";
 
 import { Button } from "@smartflow/ui/button";
@@ -25,9 +26,11 @@ export default function Home() {
           </Button>
         </div>
         <div className="flex h-full w-full items-center justify-end">
-          <Button>Sign in</Button>
+          <Button>
+            <Link href="/signin">Sign in</Link>
+          </Button>
           <Button className="ml-4" variant="outline">
-            Sign up
+            <Link href="/signup"> Sign up </Link>
           </Button>
         </div>
       </div>
@@ -39,7 +42,10 @@ export default function Home() {
           La solution no-code qui peut vous permettre de créer et déployer des
           smart contracts
         </p>
-        <Button className="mt-10">Get started</Button>
+        <Button className="mt-10">
+          {" "}
+          <Link href="/signup">Get started</Link>{" "}
+        </Button>
       </div>
     </div>
   );
