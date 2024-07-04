@@ -4,7 +4,7 @@ import { Icon } from "@iconify/react";
 
 import { Button } from "@smartflow/ui/button";
 
-// Définir les types des props
+// Définir les types des  props
 
 interface HeaderProps {
   page: string;
