@@ -1,5 +1,6 @@
+import Link from "next/link";
+
 import { Button } from "@smartflow/ui/button";
-import Link from "next/link"; 
 
 export default function Signin() {
   return (
@@ -21,10 +22,10 @@ export default function Signin() {
           <Button className="mt-4 w-full">Sign up</Button>
         </div>
         <div className="mt-4 flex justify-between">
-            <a href="#" className="text-white">
+          <a href="#" className="text-white">
             <Link href="/signin">Sign In</Link>
-            </a>
-          </div>
+          </a>
+        </div>
       </div>
     </div>
   );
