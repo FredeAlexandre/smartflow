@@ -15,7 +15,6 @@
   animation: slideUp 1s ease-out;
 }
 
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -61,4 +60,17 @@
     --input: 240 3.7% 15.9%;
     --ring: 142.4 71.8% 29.2%;
   }
+}
+
+.bloc {
+  width: 100px;
+  height: 100px;
+  background-color: #3498db;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin: 10px;
 }
