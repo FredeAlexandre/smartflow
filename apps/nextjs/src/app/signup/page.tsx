@@ -19,7 +19,9 @@ export default function Signin() {
             placeholder="Password"
             className="mt-4 h-12 w-full border border-[#2c2c2c] bg-[#2c2c2c] px-4 text-white"
           />
-          <Button className="mt-4 w-full">Sign up</Button>
+          <Link href="/dashboard">
+            <Button className="mt-4 w-full">Sign up</Button>
+          </Link>
         </div>
         <div className="mt-4 flex justify-between">
           <a href="#" className="text-white">
