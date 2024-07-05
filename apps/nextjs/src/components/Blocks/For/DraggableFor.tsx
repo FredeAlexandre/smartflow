@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDraggable } from "@dnd-kit/core";
 import { CSS, Transform } from "@dnd-kit/utilities";
 
-export const DraggableIf = ({ id, myTransform, setTransform }: any) => {
+export const DraggableFor = ({ id, myTransform, setTransform }: any) => {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: id,
   });
@@ -33,7 +33,7 @@ export const DraggableIf = ({ id, myTransform, setTransform }: any) => {
       {...listeners}
       {...attributes}
     >
-      IF
+      FOR
     </button>
   );
 };

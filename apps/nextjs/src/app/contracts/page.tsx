@@ -8,7 +8,7 @@ import { DroppableZone } from "../../components/Blocks/DroppableZone";
 
 export default () => {
   const [draggableItems, setDraggableItems] = useState([{}]);
-  const [transform, setTransform] = useState(null);
+  const [transform, setTransform] = useState({ x: 0, y: 0 });
 
   const handleDragEnd = (event: any) => {
     if (event.over && event.over.id === "droppable") {
@@ -16,7 +16,7 @@ export default () => {
       const itemsLength = draggableItems.length;
       setDraggableItems([
         ...draggableItems,
-        { id: itemsLength + 3, transform: transform },
+        { id: itemsLength + 3, transform: transform, type: event.active.id },
       ]);
     }
   };
