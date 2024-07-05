@@ -1,3 +1,4 @@
+import { DraggableFor } from "./For/DraggableFor";
 import { DraggableIf } from "./If/DraggableIf";
 
 export const DraggableBlocks = ({ setTransform }: any) => {
@@ -11,7 +12,7 @@ export const DraggableBlocks = ({ setTransform }: any) => {
       }}
     >
       <DraggableIf id={1} myTransform={null} setTransform={setTransform} />
-      <DraggableIf id={2} myTransform={null} setTransform={setTransform} />
+      <DraggableFor id={2} myTransform={null} setTransform={setTransform} />
     </div>
   );
 };
