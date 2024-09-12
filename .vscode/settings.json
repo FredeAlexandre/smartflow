@@ -1,5 +1,7 @@
 {
-  "conventionalCommits.scopes": [
-    "repository"
+  "eslint.workingDirectories": [
+    {
+      "mode": "auto"
+    }
   ]
 }
