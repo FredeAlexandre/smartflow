@@ -8,6 +8,7 @@
       "types": "./dist/src/index.d.ts",
       "default": "./src/index.ts"
     },
+    "./env": "./env.ts",
     "./client": {
       "types": "./dist/src/client/index.d.ts",
       "default": "./src/client/index.ts"
@@ -30,7 +31,8 @@
     "typecheck": "tsc --noEmit --emitDeclarationOnly false"
   },
   "dependencies": {
-    "pocketbase": "^0.21.5"
+    "pocketbase": "^0.21.5",
+    "@t3-oss/env-nextjs": "^0.11.0"
   },
   "devDependencies": {
     "@smartflow/eslint-config": "workspace:*",

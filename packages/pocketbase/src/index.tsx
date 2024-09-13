@@ -1,3 +1,5 @@
 import PocketBase from "pocketbase";
 
-export const pb = new PocketBase("http://127.0.0.1:8080");
+import { env } from "../env";
+
+export const pb = new PocketBase(env.POCKETBASE_BASEURL);
