@@ -14,6 +14,7 @@
     "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {
+    "@smartflow/pocketbase": "workspace:*",
     "@smartflow/ui": "workspace:*",
     "@smartflow/validators": "workspace:*",
     "@t3-oss/env-nextjs": "^0.11.0",

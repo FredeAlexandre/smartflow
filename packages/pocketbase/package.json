@@ -1,0 +1,50 @@
+{
+  "name": "@smartflow/pocketbase",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "default": "./src/index.ts"
+    },
+    "./client": {
+      "types": "./dist/src/client/index.d.ts",
+      "default": "./src/client/index.ts"
+    },
+    "./client/*": {
+      "types": "./dist/src/client/*.d.ts",
+      "default": [
+        "./src/client/*.ts",
+        "./src/client/*.tsx"
+      ]
+    }
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "dev": "tsc",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false"
+  },
+  "dependencies": {
+    "pocketbase": "^0.21.5"
+  },
+  "devDependencies": {
+    "@smartflow/eslint-config": "workspace:*",
+    "@smartflow/prettier-config": "workspace:*",
+    "@smartflow/tsconfig": "workspace:*",
+    "eslint": "catalog:",
+    "prettier": "catalog:",
+    "react": "catalog:react18",
+    "typescript": "catalog:",
+    "zod": "catalog:"
+  },
+  "peerDependencies": {
+    "react": "catalog:react18",
+    "zod": "catalog:"
+  },
+  "prettier": "@smartflow/prettier-config"
+}
