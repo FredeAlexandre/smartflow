@@ -9,13 +9,7 @@ const config = {
   reactStrictMode: true,
 
   /** Enables hot reloading for local packages without a build step */
-  transpilePackages: [
-    "@smartflow/api",
-    "@smartflow/auth",
-    "@smartflow/db",
-    "@smartflow/ui",
-    "@smartflow/validators",
-  ],
+  transpilePackages: ["@smartflow/ui", "@smartflow/validators"],
 
   /** We already do linting and typechecking as separate tasks in CI */
   eslint: { ignoreDuringBuilds: true },
