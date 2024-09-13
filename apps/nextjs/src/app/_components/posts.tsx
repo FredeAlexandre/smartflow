@@ -1,9 +1,9 @@
 "use client";
 
-import type { RouterOutputs } from "@acme/api";
-import { CreatePostSchema } from "@acme/db/schema";
-import { cn } from "@acme/ui";
-import { Button } from "@acme/ui/button";
+import type { RouterOutputs } from "@smartflow/api";
+import { CreatePostSchema } from "@smartflow/db/schema";
+import { cn } from "@smartflow/ui";
+import { Button } from "@smartflow/ui/button";
 import {
   Form,
   FormControl,
@@ -11,9 +11,9 @@ import {
   FormItem,
   FormMessage,
   useForm,
-} from "@acme/ui/form";
-import { Input } from "@acme/ui/input";
-import { toast } from "@acme/ui/toast";
+} from "@smartflow/ui/form";
+import { Input } from "@smartflow/ui/input";
+import { toast } from "@smartflow/ui/toast";
 
 import { api } from "~/trpc/react";
 
