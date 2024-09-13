@@ -18,6 +18,9 @@ const config = {
   /** We already do linting and typechecking as separate tasks in CI */
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: true },
+
+  /** Output as standalone to ship in Dockerfile */
+  output: "standalone",
 };
 
 export default config;
