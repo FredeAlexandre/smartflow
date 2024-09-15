@@ -7,19 +7,18 @@
     ".": "./index.js"
   },
   "scripts": {
-    "clean": "rm -rf node_modules",
-    "format": "bun run --bun prettier --check . --ignore-path ../../.gitignore",
+    "clean": "git clean -xdf .cache .turbo node_modules",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@ianvs/prettier-plugin-sort-imports": "^4.2.1",
-    "prettier": "^3.3.1",
-    "prettier-plugin-tailwindcss": "^0.5.14"
+    "@ianvs/prettier-plugin-sort-imports": "^4.3.1",
+    "prettier": "catalog:",
+    "prettier-plugin-tailwindcss": "^0.6.6"
   },
   "devDependencies": {
     "@smartflow/tsconfig": "workspace:*",
-    "typescript": "^5.4.5",
-    "@types/node": "^20.14.9"
+    "typescript": "catalog:"
   },
   "prettier": "@smartflow/prettier-config"
 }
