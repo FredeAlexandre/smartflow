@@ -1,10 +1,7 @@
 import { createEnv } from "@t3-oss/env-nextjs";
 import { z } from "zod";
 
-import { env as PocketbaseEnv } from "@smartflow/pocketbase/env";
-
 export const env = createEnv({
-  extends: [PocketbaseEnv],
   shared: {
     NODE_ENV: z
       .enum(["development", "production", "test"])

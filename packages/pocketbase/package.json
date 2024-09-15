@@ -4,17 +4,9 @@
   "version": "0.1.0",
   "type": "module",
   "exports": {
-    ".": {
-      "types": "./dist/src/index.d.ts",
-      "default": "./src/index.ts"
-    },
-    "./env": "./env.ts",
-    "./client": {
-      "types": "./dist/src/client/index.d.ts",
-      "default": "./src/client/index.ts"
-    },
+    ".": "./src/index.tsx",
+    "./client": "./src/client/index.tsx",
     "./client/*": {
-      "types": "./dist/src/client/*.d.ts",
       "default": [
         "./src/client/*.ts",
         "./src/client/*.tsx"
@@ -23,9 +15,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "build": "tsc",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
-    "dev": "tsc",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false"
