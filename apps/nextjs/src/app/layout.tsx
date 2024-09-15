@@ -3,11 +3,13 @@ import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 
 import { cn } from "@smartflow/ui";
-import { ThemeProvider, ThemeToggle } from "@smartflow/ui/theme";
+import { ThemeProvider } from "@smartflow/ui/theme";
 import { Toaster } from "@smartflow/ui/toast";
 
 import "~/app/globals.css";
 
+import { PocketBaseProvider } from "~/components/pocket-base-provider";
+import { QueryClientProvider } from "~/components/query-client-provider";
 import { env } from "~/env";
 
 export const metadata: Metadata = {
@@ -49,10 +51,9 @@ export default function RootLayout(props: { children: React.ReactNode }) {
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {props.children}
-          <div className="absolute bottom-4 right-4">
-            <ThemeToggle />
-          </div>
+          <QueryClientProvider>
+            <PocketBaseProvider>{props.children}</PocketBaseProvider>
+          </QueryClientProvider>
           <Toaster />
         </ThemeProvider>
       </body>
