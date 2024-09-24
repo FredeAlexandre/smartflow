@@ -14,6 +14,7 @@
     "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {
+    "@dnd-kit/core": "^6.1.0",
     "@smartflow/pocketbase": "workspace:*",
     "@smartflow/ui": "workspace:*",
     "@smartflow/validators": "workspace:*",
