@@ -5,28 +5,19 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 
-import { usePocketBase } from "@smartflow/pocketbase/client";
+import { useAuth } from "@smartflow/pocketbase/client/auth";
 import { Button } from "@smartflow/ui/button";
 import { toast } from "@smartflow/ui/toast";
 
 export default function SignIn() {
-  const pb = usePocketBase();
-
   const router = useRouter();
 
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const { login } = useAuth();
 
   const { mutate: signin } = useMutation({
-    mutationFn: async ({
-      email,
-      password,
-    }: {
-      email: string;
-      password: string;
-    }) => {
-      return await pb.collection("users").authWithPassword(email, password);
-    },
+    mutationFn: login,
     onSuccess: () => {
       toast("Sign-in Successful! Redirecting...");
       setTimeout(() => {

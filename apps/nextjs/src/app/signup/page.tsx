@@ -5,33 +5,19 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 
-import { usePocketBase } from "@smartflow/pocketbase/client";
+import { useAuth } from "@smartflow/pocketbase/client/auth";
 import { Button } from "@smartflow/ui/button";
 import { toast } from "@smartflow/ui/toast";
 
 export default function SignUp() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [passwordConfirm, setPasswordConfirm] = useState<string>("");
-  const pb = usePocketBase();
+  const [repassword, setRepassword] = useState<string>("");
   const router = useRouter();
+  const { register } = useAuth();
 
   const { mutate: signup } = useMutation({
-    mutationFn: async ({
-      email,
-      password,
-      passwordConfirm,
-    }: {
-      email: string;
-      password: string;
-      passwordConfirm: string;
-    }) => {
-      await pb.collection("users").create({
-        email,
-        password,
-        passwordConfirm,
-      });
-    },
+    mutationFn: register,
     onSuccess: () => {
       toast("Registration Successful! Redirecting...");
       setTimeout(() => {
@@ -50,7 +36,7 @@ export default function SignUp() {
         <p className="mt-4 text-white">Create an account to continue</p>
         <form
           onSubmit={() => {
-            signup({ email, password, passwordConfirm });
+            signup({ email, password, repassword });
           }}
           className="mt-8 w-2/4"
         >
@@ -73,8 +59,8 @@ export default function SignUp() {
           <input
             type="password"
             placeholder="Confirm Password"
-            value={passwordConfirm}
-            onChange={(e) => setPasswordConfirm(e.target.value)}
+            value={repassword}
+            onChange={(e) => setRepassword(e.target.value)}
             className="mt-4 h-12 w-full border border-[#2c2c2c] bg-[#2c2c2c] px-4 text-white"
             required
           />
