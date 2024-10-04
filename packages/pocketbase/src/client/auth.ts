@@ -17,7 +17,7 @@ import { usePocketBase } from ".";
  */
 export const UserSchema = z.object({
   id: z.string(),
-  username: z.string().nullable(),
+  username: z.string(),
   email: z.string().email(),
   created: z.string(),
   updated: z.string(),
@@ -33,19 +33,17 @@ export type User = z.infer<typeof UserSchema>;
 export const useAuth = () => {
   const pb = usePocketBase();
 
-  const user = React.useSyncExternalStore(
-    (callback) => () => {
-      pb.authStore.onChange(callback);
-    },
-    () => UserSchema.nullable().parse(pb.authStore.model),
-  );
+  const [user, setUser] = React.useState<User | null>(null);
 
-  const token = React.useSyncExternalStore(
-    (callback) => () => {
-      pb.authStore.onChange(callback);
-    },
-    () => UserSchema.nullable().parse(pb.authStore.token),
-  );
+  React.useEffect(() => {
+    return pb.authStore.onChange((_, model) => {
+      if (model == null) {
+        setUser(null);
+      } else {
+        setUser(UserSchema.parse(model));
+      }
+    }, true);
+  }, []);
 
   const login = ({ email, password }: { email: string; password: string }) => {
     return pb.collection("users").authWithPassword(email, password);
@@ -65,5 +63,5 @@ export const useAuth = () => {
     return pb.collection("users").create(data);
   };
 
-  return { user, token, login, logout, register };
+  return { user, login, logout, register };
 };
