@@ -5,6 +5,7 @@ import { z } from "zod";
 
 import { usePocketBase } from "@smartflow/pocketbase/client";
 
+
 function PageLayout({ children }: { children?: React.ReactNode }) {
   return <div className="flex justify-center pt-10">{children}</div>;
 }
