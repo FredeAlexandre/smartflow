@@ -5,27 +5,9 @@
     "node": ">=20.16.0"
   },
   "packageManager": "pnpm@9.12.1",
-  "scripts": {
-    "build:app": "nx build @smartflow/nextjs",
-    "dev": "todo",
-    "format": "todo",
-    "lint": "todo",
-    "lint:ws": "pnpm dlx sherif@latest",
-    "typecheck": "todo"
-  },
+  "scripts": {},
   "devDependencies": {
-    "@nx/eslint": "20.0.0",
-    "@nx/next": "20.0.0",
-    "@smartflow/prettier-config": "workspace:*",
-    "eslint": "~8.57.0",
     "nx": "20.0.0",
-    "prettier": "catalog:",
     "typescript": "catalog:"
-  },
-  "prettier": "@smartflow/prettier-config",
-  "dependencies": {
-    "next": "14.2.3",
-    "react": "18.3.1",
-    "react-dom": "18.3.1"
   }
 }
