@@ -7,8 +7,8 @@ settings:
 catalogs:
   default:
     typescript:
-      specifier: ^5.5.4
-      version: 5.5.4
+      specifier: ^5.6.3
+      version: 5.6.3
 
 importers:
 
@@ -25,7 +25,9 @@ importers:
         version: 1.0.0
       typescript:
         specifier: 'catalog:'
-        version: 5.5.4
+        version: 5.6.3
+
+  apps/pocketbase: {}
 
   apps/website:
     dependencies:
@@ -58,13 +60,11 @@ importers:
         specifier: ^18.3.1
         version: 18.3.1
       typescript:
-        specifier: ^5.6.3
+        specifier: 'catalog:'
         version: 5.6.3
       vite-tsconfig-paths:
         specifier: ^5.0.1
         version: 5.0.1(typescript@5.6.3)(vite@5.4.8(@types/node@22.7.5)(terser@5.34.1))
-
-  tooling/github: {}
 
   tooling/typescript: {}
 
@@ -2776,11 +2776,6 @@ packages:
   type-fest@3.13.1:
     resolution: {integrity: sha512-tLq3bSNx+xSpwvAJnzrK0Ep5CLNWjvFTOp71URMaAEWBfRb9nnJiBoUe0tF8bI4ZFO3omgBR6NvnbzVUT3Ly4g==}
     engines: {node: '>=14.16'}
-
-  typescript@5.5.4:
-    resolution: {integrity: sha512-Mtq29sKDAEYP7aljRgtPOpTvOfbwRWlS6dPRzwjdE+C0R4brX/GUyhHSecbHMFLNBLcJIPt9nl9yG5TZ1weH+Q==}
-    engines: {node: '>=14.17'}
-    hasBin: true
 
   typescript@5.6.3:
     resolution: {integrity: sha512-hjcS1mhfuyi4WW8IWtjP7brDrG2cuDZukyrYrSauoXGNgx0S7zceP07adYkJycEr56BOUTNPzbInooiN3fn1qw==}
@@ -5709,8 +5704,6 @@ snapshots:
   type-fest@2.19.0: {}
 
   type-fest@3.13.1: {}
-
-  typescript@5.5.4: {}
 
   typescript@5.6.3: {}
 
