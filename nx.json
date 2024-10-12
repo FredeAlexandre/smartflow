@@ -4,6 +4,9 @@
     "build": {
       "dependsOn": ["^build"],
       "cache": true
+    },
+    "dev": {
+      "cache": false
     }
   },
   "defaultBase": "main"
