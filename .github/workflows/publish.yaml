@@ -37,4 +37,4 @@ jobs:
           context: .
           file: ./${{ matrix.dockerfile }}  # Dynamically select Dockerfile
           push: true
-          tags: ghcr.io/fredealexandre/smartflow:${{ matrix.tag }}:prod
+          tags: ghcr.io/fredealexandre/smartflow-${{ matrix.tag }}:prod
