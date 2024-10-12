@@ -8,11 +8,13 @@
   "scripts": {
     "build": "nx run-many -t build -p website",
     "dev": "nx run-many -t dev -p website --watch",
-    "lint": "pnpm biome check --write ."
+    "lint": "pnpm biome check --write .",
+    "lint:ws": "sherif"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.3",
     "nx": "20.0.0",
+    "sherif": "^1.0.0",
     "typescript": "catalog:"
   }
 }
