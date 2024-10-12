@@ -29,10 +29,7 @@
           "{projectRoot}/app.config.ts",
           "{projectRoot}/tsconfig.json"
         ],
-        "outputs": [
-          "{projectRoot}/.vercel",
-          "{projectRoot}/.vinxi"
-        ]
+        "outputs": ["{projectRoot}/.vercel", "{projectRoot}/.vinxi"]
       }
     }
   }
