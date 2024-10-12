@@ -20,5 +20,20 @@
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.1",
     "typescript": "^5.6.3"
+  },
+  "nx": {
+    "targets": {
+      "build": {
+        "inputs": [
+          "{projectRoot}/app/**/*.{tsx|ts}",
+          "{projectRoot}/app.config.ts",
+          "{projectRoot}/tsconfig.json"
+        ],
+        "outputs": [
+          "{projectRoot}/.vercel",
+          "{projectRoot}/.vinxi"
+        ]
+      }
+    }
   }
 }
