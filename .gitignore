@@ -50,3 +50,12 @@ dist/
 
 # turbo
 .turbo
+
+
+
+.nx/cache
+.nx/workspace-data
+
+# Next.js
+.next
+out
