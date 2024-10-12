@@ -59,3 +59,5 @@ dist/
 # Next.js
 .next
 out
+
+.vinxi
