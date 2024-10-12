@@ -21,11 +21,36 @@
     "enabled": true
   },
   "linter": {
-    "enabled": true
+    "enabled": true,
+    "rules": {
+      "recommended": true
+    }
   },
   "javascript": {
     "formatter": {
       "quoteStyle": "double"
     }
-  }
+  },
+  "overrides": [
+    {
+      "include": ["apps/website/**"],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "useHookAtTopLevel": "error"
+          },
+          "nursery": {
+            "useSortedClasses": {
+              "fix": "safe",
+              "level": "info",
+              "options": {
+                "attributes": ["classList"],
+                "functions": ["clsx", "twMerge"]
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
 }

@@ -1,4 +1,4 @@
-import * as fs from "fs";
+import * as fs from "node:fs";
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/start";
 
@@ -30,6 +30,7 @@ function Home() {
 
   return (
     <button
+      type="button"
       onClick={() => {
         updateCount(1).then(() => {
           router.invalidate();
