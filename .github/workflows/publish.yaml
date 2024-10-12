@@ -28,7 +28,7 @@ jobs:
           file: ./docker-images/pocketbase/Dockerfile
           push: true
           build-args:
-            - PB_VERSION=0.22.20
+            PB_VERSION=0.22.20
           tags: ghcr.io/fredealexandre/smartflow-pocketbase:prod
 
       - name: Build and push Docker image Next.js
