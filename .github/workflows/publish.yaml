@@ -10,10 +10,6 @@ permissions:
 jobs:
   push-image:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        dockerfile: [docker-images/pocketbase/Dockerfile, docker-images/monorepo-apps/Dockerfile]
-        tag: [pocketbase, netxjs]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -31,10 +27,21 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push Docker image
+      - name: Build and push Docker image Pocketbase
+        uses: docker/build-push-action@v6
+        with:
+          context: ./docker-images/pocketbase
+          file: ./docker-images/pocketbase/Dockerfile
+          push: true
+          build-args:
+            PB_VERSION: 0.22.20
+          tags: ghcr.io/fredealexandre/smartflow-pocketbase:prod
+
+      - name: Build and push Docker image Next.js
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: ./${{ matrix.dockerfile }}  # Dynamically select Dockerfile
+          file: ./docker-images/monorepo-apps/Dockerfile
+          target: nextjs
           push: true
-          tags: ghcr.io/fredealexandre/smartflow-${{ matrix.tag }}:prod
+          tags: ghcr.io/fredealexandre/smartflow-netxjs:prod
