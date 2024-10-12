@@ -4,6 +4,7 @@ export default function HomePage() {
       <h1 className="text-3xl">
         Welcome to <span className="font-bold">smartflow</span>
       </h1>
+      <p>The first EVM Smart Contract no code plateform</p>
     </div>
   );
 }
