@@ -3,6 +3,9 @@ import { Outlet, ScrollRestoration } from "@tanstack/react-router";
 import { Body, Head, Html, Meta, Scripts } from "@tanstack/start";
 import type * as React from "react";
 
+// @ts-expect-error
+import globals from "../globals.css?url";
+
 import { ThemeProvider } from "~/components/theme-provider";
 
 export const Route = createRootRoute({
@@ -18,6 +21,7 @@ export const Route = createRootRoute({
       title: "TanStack Start Starter",
     },
   ],
+  links: () => [{ rel: "stylesheet", href: globals }],
   component: RootComponent,
 });
 
