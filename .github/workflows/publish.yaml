@@ -30,11 +30,27 @@ jobs:
           build-args: PB_VERSION=0.22.21
           tags: ghcr.io/fredealexandre/smartflow-pocketbase:prod
 
+      - name: Add pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Bundle website
+        run: pnpm run build
+
       - name: Build and push Docker image Next.js
         uses: docker/build-push-action@v6
         with:
           context: ./apps/website
           file: ./apps/website/Dockerfile
-          target: nextjs
           push: true
           tags: ghcr.io/fredealexandre/smartflow-website:prod
