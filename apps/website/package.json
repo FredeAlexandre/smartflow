@@ -80,10 +80,7 @@
           "{projectRoot}/app.config.ts",
           "{projectRoot}/tsconfig.json"
         ],
-        "outputs": [
-          "{projectRoot}/.output",
-          "{projectRoot}/.vinxi"
-        ]
+        "outputs": ["{projectRoot}/.output", "{projectRoot}/.vinxi"]
       }
     }
   }
