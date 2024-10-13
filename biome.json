@@ -9,7 +9,8 @@
     "ignore": [
       "**/tsconfig.json",
       "tooling/typescript",
-      "apps/website/app/routeTree.gen.ts"
+      "apps/website/app/routeTree.gen.ts",
+      "apps/contracts/artifacts"
     ]
   },
   "formatter": {
