@@ -1,0 +1,6 @@
+{
+  "name": "pocketbase",
+  "scripts": {
+    "dev": "node dev.js"
+  }
+}

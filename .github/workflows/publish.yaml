@@ -1,8 +1,8 @@
 name: Publish Docker images
 on:
- push:
-   branches:
-     - main
+  push:
+    branches:
+      - main
 
 permissions:
   packages: write
@@ -24,18 +24,17 @@ jobs:
       - name: Build and push Docker image Pocketbase
         uses: docker/build-push-action@v6
         with:
-          context: ./docker-images/pocketbase
-          file: ./docker-images/pocketbase/Dockerfile
+          context: ./apps/pocketbase
+          file: ./apps/pocketbase/Dockerfile
           push: true
-          build-args:
-            PB_VERSION=0.22.20
+          build-args: PB_VERSION=0.22.21
           tags: ghcr.io/fredealexandre/smartflow-pocketbase:prod
 
       - name: Build and push Docker image Next.js
         uses: docker/build-push-action@v6
         with:
-          context: .
-          file: ./docker-images/monorepo-apps/Dockerfile
+          context: ./apps/website
+          file: ./apps/website/Dockerfile
           target: nextjs
           push: true
-          tags: ghcr.io/fredealexandre/smartflow-netxjs:prod
+          tags: ghcr.io/fredealexandre/smartflow-website:prod
