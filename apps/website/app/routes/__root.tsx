@@ -3,6 +3,8 @@ import { Outlet, ScrollRestoration } from "@tanstack/react-router";
 import { Body, Head, Html, Meta, Scripts } from "@tanstack/start";
 import type * as React from "react";
 
+import { ThemeProvider } from "~/components/theme-provider";
+
 export const Route = createRootRoute({
   meta: () => [
     {
@@ -22,7 +24,9 @@ export const Route = createRootRoute({
 function RootComponent() {
   return (
     <RootDocument>
-      <Outlet />
+      <ThemeProvider defaultTheme="dark" storageKey="ui-theme">
+        <Outlet />
+      </ThemeProvider>
     </RootDocument>
   );
 }
