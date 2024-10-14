@@ -68,7 +68,14 @@ export default function TeamSettings() {
 
   return (
     <div>
-      <Navbar />
+      <Navbar
+        links={[
+          { label: "Overview", path: "/overview" },
+          { label: "Project", path: "/project" },
+          { label: "Activity", path: "/team_activity" },
+          { label: "Settings", path: "/team_settings" },
+        ]}
+      />
       <div className="container mx-auto py-10">
         <h1 className="mb-6 text-3xl font-bold">Paramètres de l'équipe</h1>
         <Tabs defaultValue="general" className="space-y-4">
