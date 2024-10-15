@@ -12,7 +12,14 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
-import { Route as skeletonComponentsImport } from './routes/(skeleton)/components'
+import { Route as skeletonTeamsettingsImport } from './routes/(skeleton)/team_settings'
+import { Route as skeletonTeamactivityImport } from './routes/(skeleton)/team_activity'
+import { Route as skeletonProjectsettingsImport } from './routes/(skeleton)/project_settings'
+import { Route as skeletonProjectactivityImport } from './routes/(skeleton)/project_activity'
+import { Route as skeletonProjectImport } from './routes/(skeleton)/project'
+import { Route as skeletonProfilesettingsImport } from './routes/(skeleton)/profile_settings'
+import { Route as skeletonOverviewImport } from './routes/(skeleton)/overview'
+import { Route as skeletonNocodeImport } from './routes/(skeleton)/nocode'
 
 // Create/Update Routes
 
@@ -21,8 +28,43 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const skeletonComponentsRoute = skeletonComponentsImport.update({
-  path: '/components',
+const skeletonTeamsettingsRoute = skeletonTeamsettingsImport.update({
+  path: '/team_settings',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const skeletonTeamactivityRoute = skeletonTeamactivityImport.update({
+  path: '/team_activity',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const skeletonProjectsettingsRoute = skeletonProjectsettingsImport.update({
+  path: '/project_settings',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const skeletonProjectactivityRoute = skeletonProjectactivityImport.update({
+  path: '/project_activity',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const skeletonProjectRoute = skeletonProjectImport.update({
+  path: '/project',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const skeletonProfilesettingsRoute = skeletonProfilesettingsImport.update({
+  path: '/profile_settings',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const skeletonOverviewRoute = skeletonOverviewImport.update({
+  path: '/overview',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const skeletonNocodeRoute = skeletonNocodeImport.update({
+  path: '/nocode',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -37,11 +79,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/(skeleton)/components': {
-      id: '/components'
-      path: '/components'
-      fullPath: '/components'
-      preLoaderRoute: typeof skeletonComponentsImport
+    '/(skeleton)/nocode': {
+      id: '/nocode'
+      path: '/nocode'
+      fullPath: '/nocode'
+      preLoaderRoute: typeof skeletonNocodeImport
+      parentRoute: typeof rootRoute
+    }
+    '/(skeleton)/overview': {
+      id: '/overview'
+      path: '/overview'
+      fullPath: '/overview'
+      preLoaderRoute: typeof skeletonOverviewImport
+      parentRoute: typeof rootRoute
+    }
+    '/(skeleton)/profile_settings': {
+      id: '/profile_settings'
+      path: '/profile_settings'
+      fullPath: '/profile_settings'
+      preLoaderRoute: typeof skeletonProfilesettingsImport
+      parentRoute: typeof rootRoute
+    }
+    '/(skeleton)/project': {
+      id: '/project'
+      path: '/project'
+      fullPath: '/project'
+      preLoaderRoute: typeof skeletonProjectImport
+      parentRoute: typeof rootRoute
+    }
+    '/(skeleton)/project_activity': {
+      id: '/project_activity'
+      path: '/project_activity'
+      fullPath: '/project_activity'
+      preLoaderRoute: typeof skeletonProjectactivityImport
+      parentRoute: typeof rootRoute
+    }
+    '/(skeleton)/project_settings': {
+      id: '/project_settings'
+      path: '/project_settings'
+      fullPath: '/project_settings'
+      preLoaderRoute: typeof skeletonProjectsettingsImport
+      parentRoute: typeof rootRoute
+    }
+    '/(skeleton)/team_activity': {
+      id: '/team_activity'
+      path: '/team_activity'
+      fullPath: '/team_activity'
+      preLoaderRoute: typeof skeletonTeamactivityImport
+      parentRoute: typeof rootRoute
+    }
+    '/(skeleton)/team_settings': {
+      id: '/team_settings'
+      path: '/team_settings'
+      fullPath: '/team_settings'
+      preLoaderRoute: typeof skeletonTeamsettingsImport
       parentRoute: typeof rootRoute
     }
   }
@@ -51,37 +142,100 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/components': typeof skeletonComponentsRoute
+  '/nocode': typeof skeletonNocodeRoute
+  '/overview': typeof skeletonOverviewRoute
+  '/profile_settings': typeof skeletonProfilesettingsRoute
+  '/project': typeof skeletonProjectRoute
+  '/project_activity': typeof skeletonProjectactivityRoute
+  '/project_settings': typeof skeletonProjectsettingsRoute
+  '/team_activity': typeof skeletonTeamactivityRoute
+  '/team_settings': typeof skeletonTeamsettingsRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/components': typeof skeletonComponentsRoute
+  '/nocode': typeof skeletonNocodeRoute
+  '/overview': typeof skeletonOverviewRoute
+  '/profile_settings': typeof skeletonProfilesettingsRoute
+  '/project': typeof skeletonProjectRoute
+  '/project_activity': typeof skeletonProjectactivityRoute
+  '/project_settings': typeof skeletonProjectsettingsRoute
+  '/team_activity': typeof skeletonTeamactivityRoute
+  '/team_settings': typeof skeletonTeamsettingsRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/components': typeof skeletonComponentsRoute
+  '/nocode': typeof skeletonNocodeRoute
+  '/overview': typeof skeletonOverviewRoute
+  '/profile_settings': typeof skeletonProfilesettingsRoute
+  '/project': typeof skeletonProjectRoute
+  '/project_activity': typeof skeletonProjectactivityRoute
+  '/project_settings': typeof skeletonProjectsettingsRoute
+  '/team_activity': typeof skeletonTeamactivityRoute
+  '/team_settings': typeof skeletonTeamsettingsRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/components'
+  fullPaths:
+    | '/'
+    | '/nocode'
+    | '/overview'
+    | '/profile_settings'
+    | '/project'
+    | '/project_activity'
+    | '/project_settings'
+    | '/team_activity'
+    | '/team_settings'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/components'
-  id: '__root__' | '/' | '/components'
+  to:
+    | '/'
+    | '/nocode'
+    | '/overview'
+    | '/profile_settings'
+    | '/project'
+    | '/project_activity'
+    | '/project_settings'
+    | '/team_activity'
+    | '/team_settings'
+  id:
+    | '__root__'
+    | '/'
+    | '/nocode'
+    | '/overview'
+    | '/profile_settings'
+    | '/project'
+    | '/project_activity'
+    | '/project_settings'
+    | '/team_activity'
+    | '/team_settings'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  skeletonComponentsRoute: typeof skeletonComponentsRoute
+  skeletonNocodeRoute: typeof skeletonNocodeRoute
+  skeletonOverviewRoute: typeof skeletonOverviewRoute
+  skeletonProfilesettingsRoute: typeof skeletonProfilesettingsRoute
+  skeletonProjectRoute: typeof skeletonProjectRoute
+  skeletonProjectactivityRoute: typeof skeletonProjectactivityRoute
+  skeletonProjectsettingsRoute: typeof skeletonProjectsettingsRoute
+  skeletonTeamactivityRoute: typeof skeletonTeamactivityRoute
+  skeletonTeamsettingsRoute: typeof skeletonTeamsettingsRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  skeletonComponentsRoute: skeletonComponentsRoute,
+  skeletonNocodeRoute: skeletonNocodeRoute,
+  skeletonOverviewRoute: skeletonOverviewRoute,
+  skeletonProfilesettingsRoute: skeletonProfilesettingsRoute,
+  skeletonProjectRoute: skeletonProjectRoute,
+  skeletonProjectactivityRoute: skeletonProjectactivityRoute,
+  skeletonProjectsettingsRoute: skeletonProjectsettingsRoute,
+  skeletonTeamactivityRoute: skeletonTeamactivityRoute,
+  skeletonTeamsettingsRoute: skeletonTeamsettingsRoute,
 }
 
 export const routeTree = rootRoute
@@ -97,14 +251,42 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/components"
+        "/nocode",
+        "/overview",
+        "/profile_settings",
+        "/project",
+        "/project_activity",
+        "/project_settings",
+        "/team_activity",
+        "/team_settings"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/components": {
-      "filePath": "(skeleton)/components.tsx"
+    "/nocode": {
+      "filePath": "(skeleton)/nocode.tsx"
+    },
+    "/overview": {
+      "filePath": "(skeleton)/overview.tsx"
+    },
+    "/profile_settings": {
+      "filePath": "(skeleton)/profile_settings.tsx"
+    },
+    "/project": {
+      "filePath": "(skeleton)/project.tsx"
+    },
+    "/project_activity": {
+      "filePath": "(skeleton)/project_activity.tsx"
+    },
+    "/project_settings": {
+      "filePath": "(skeleton)/project_settings.tsx"
+    },
+    "/team_activity": {
+      "filePath": "(skeleton)/team_activity.tsx"
+    },
+    "/team_settings": {
+      "filePath": "(skeleton)/team_settings.tsx"
     }
   }
 }
