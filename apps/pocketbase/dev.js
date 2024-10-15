@@ -4,8 +4,10 @@ const DOCKER_IMAGE_NAME = "pocketbase";
 const DOCKER_DATA_VOLUME_NAME = "pb_data";
 
 const commands = {
-  START_CONTAINER: `docker run -it --rm -v ${DOCKER_DATA_VOLUME_NAME}:/pb/pb_data -v ./pb_migrations:/pb/pb_migrations -v ./pb_hooks:/pb/pb_hooks -p 8080:8080 ${DOCKER_IMAGE_NAME}`,
+  START_CONTAINER: `docker run -t --rm -v ${DOCKER_DATA_VOLUME_NAME}:/pb/pb_data -v ./pb_migrations:/pb/pb_migrations -v ./pb_hooks:/pb/pb_hooks -p 8080:8080 ${DOCKER_IMAGE_NAME}`,
   BUILD_IMAGE: `docker build -t ${DOCKER_IMAGE_NAME} .`,
+  DELETE_IMAGE: `docker rmi -f ${DOCKER_IMAGE_NAME}`,
+  LIST_CONTAINERS: `docker ps -a -q --filter "ancestor=${DOCKER_IMAGE_NAME}"`,
   DOES_IMAGE_EXIST: `docker image inspect ${DOCKER_IMAGE_NAME}`,
   CREATE_VOLUME: `docker volume create ${DOCKER_DATA_VOLUME_NAME}`,
   DOES_VOLUME_EXIST: `docker volume inspect ${DOCKER_DATA_VOLUME_NAME}`,
@@ -18,6 +20,16 @@ function runCommand(command) {
   } catch (error) {
     console.error(`Error executing command: ${command}`);
     process.exit(1);
+  }
+}
+
+// Verifier si Docker est lancer
+function isDockerRunning() {
+  try {
+    execSync("docker ps", { stdio: "ignore" });
+    return true;
+  } catch {
+    return false;
   }
 }
 
@@ -41,19 +53,55 @@ function doesVolumeExist() {
   }
 }
 
+function getContainersRunningImage() {
+  return execSync(commands.LIST_CONTAINERS, { encoding: "utf-8" }).split("\n");
+}
+
+function stopContainers() {
+  const containers = getContainersRunningImage();
+
+  for (const container of containers) {
+    if (container) {
+      runCommand(`docker stop ${container}`);
+      runCommand(`docker rm ${container}`);
+    }
+  }
+}
+
+function deleteImage() {
+  stopContainers();
+  runCommand(commands.DELETE_IMAGE);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
+console.log("Running PocketBase...");
+if (!isDockerRunning()) {
+  console.error("Docker is not running, please start Docker first.");
+  process.exit(1);
+}
+
 // Si le volume n'existe pas, on le crée
 if (!doesVolumeExist()) {
   console.log("Volume pb_data does not exist, creating volume...");
   runCommand(commands.CREATE_VOLUME);
+} else {
+  console.log("Volume pb_data exists, skipping volume creation.");
 }
 
 // Si l'image existe, on lance le container, sinon on la build d'abord
 if (doesImageExist()) {
-  console.log("Image pocketbase exists, starting container...");
-  runCommand(commands.START_CONTAINER);
-} else {
-  console.log("Image pocketbase does not exist, building image...");
-  runCommand(commands.BUILD_IMAGE);
-  console.log("Image built successfully, starting container...");
-  runCommand(commands.START_CONTAINER);
+  console.log("Image pocketbase exists, deleting...");
+  deleteImage();
 }
+
+console.log("Building image...");
+runCommand(commands.BUILD_IMAGE);
+console.log("Image built successfully, starting container...");
+runCommand(commands.START_CONTAINER);
+
+// On process exit delete the image
+process.on("exit", () => {
+  console.log("Deleting image...");
+  deleteImage();
+});
