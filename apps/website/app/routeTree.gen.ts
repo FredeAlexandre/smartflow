@@ -20,6 +20,10 @@ import { Route as skeletonProjectImport } from './routes/(skeleton)/project'
 import { Route as skeletonProfilesettingsImport } from './routes/(skeleton)/profile_settings'
 import { Route as skeletonOverviewImport } from './routes/(skeleton)/overview'
 import { Route as skeletonNocodeImport } from './routes/(skeleton)/nocode'
+import { Route as authSignupImport } from './routes/(auth)/signup'
+import { Route as authSigninImport } from './routes/(auth)/signin'
+import { Route as authForgotPasswordImport } from './routes/(auth)/forgot-password'
+import { Route as authResetPasswordTokenImport } from './routes/(auth)/reset-password.$token'
 
 // Create/Update Routes
 
@@ -68,6 +72,26 @@ const skeletonNocodeRoute = skeletonNocodeImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const authSignupRoute = authSignupImport.update({
+  path: '/signup',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const authSigninRoute = authSigninImport.update({
+  path: '/signin',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const authForgotPasswordRoute = authForgotPasswordImport.update({
+  path: '/forgot-password',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const authResetPasswordTokenRoute = authResetPasswordTokenImport.update({
+  path: '/reset-password/$token',
+  getParentRoute: () => rootRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -77,6 +101,27 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/(auth)/forgot-password': {
+      id: '/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof authForgotPasswordImport
+      parentRoute: typeof rootRoute
+    }
+    '/(auth)/signin': {
+      id: '/signin'
+      path: '/signin'
+      fullPath: '/signin'
+      preLoaderRoute: typeof authSigninImport
+      parentRoute: typeof rootRoute
+    }
+    '/(auth)/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof authSignupImport
       parentRoute: typeof rootRoute
     }
     '/(skeleton)/nocode': {
@@ -135,6 +180,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof skeletonTeamsettingsImport
       parentRoute: typeof rootRoute
     }
+    '/(auth)/reset-password/$token': {
+      id: '/reset-password/$token'
+      path: '/reset-password/$token'
+      fullPath: '/reset-password/$token'
+      preLoaderRoute: typeof authResetPasswordTokenImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -142,6 +194,9 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/forgot-password': typeof authForgotPasswordRoute
+  '/signin': typeof authSigninRoute
+  '/signup': typeof authSignupRoute
   '/nocode': typeof skeletonNocodeRoute
   '/overview': typeof skeletonOverviewRoute
   '/profile_settings': typeof skeletonProfilesettingsRoute
@@ -150,10 +205,14 @@ export interface FileRoutesByFullPath {
   '/project_settings': typeof skeletonProjectsettingsRoute
   '/team_activity': typeof skeletonTeamactivityRoute
   '/team_settings': typeof skeletonTeamsettingsRoute
+  '/reset-password/$token': typeof authResetPasswordTokenRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/forgot-password': typeof authForgotPasswordRoute
+  '/signin': typeof authSigninRoute
+  '/signup': typeof authSignupRoute
   '/nocode': typeof skeletonNocodeRoute
   '/overview': typeof skeletonOverviewRoute
   '/profile_settings': typeof skeletonProfilesettingsRoute
@@ -162,11 +221,15 @@ export interface FileRoutesByTo {
   '/project_settings': typeof skeletonProjectsettingsRoute
   '/team_activity': typeof skeletonTeamactivityRoute
   '/team_settings': typeof skeletonTeamsettingsRoute
+  '/reset-password/$token': typeof authResetPasswordTokenRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/forgot-password': typeof authForgotPasswordRoute
+  '/signin': typeof authSigninRoute
+  '/signup': typeof authSignupRoute
   '/nocode': typeof skeletonNocodeRoute
   '/overview': typeof skeletonOverviewRoute
   '/profile_settings': typeof skeletonProfilesettingsRoute
@@ -175,12 +238,16 @@ export interface FileRoutesById {
   '/project_settings': typeof skeletonProjectsettingsRoute
   '/team_activity': typeof skeletonTeamactivityRoute
   '/team_settings': typeof skeletonTeamsettingsRoute
+  '/reset-password/$token': typeof authResetPasswordTokenRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/forgot-password'
+    | '/signin'
+    | '/signup'
     | '/nocode'
     | '/overview'
     | '/profile_settings'
@@ -189,9 +256,13 @@ export interface FileRouteTypes {
     | '/project_settings'
     | '/team_activity'
     | '/team_settings'
+    | '/reset-password/$token'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/forgot-password'
+    | '/signin'
+    | '/signup'
     | '/nocode'
     | '/overview'
     | '/profile_settings'
@@ -200,9 +271,13 @@ export interface FileRouteTypes {
     | '/project_settings'
     | '/team_activity'
     | '/team_settings'
+    | '/reset-password/$token'
   id:
     | '__root__'
     | '/'
+    | '/forgot-password'
+    | '/signin'
+    | '/signup'
     | '/nocode'
     | '/overview'
     | '/profile_settings'
@@ -211,11 +286,15 @@ export interface FileRouteTypes {
     | '/project_settings'
     | '/team_activity'
     | '/team_settings'
+    | '/reset-password/$token'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  authForgotPasswordRoute: typeof authForgotPasswordRoute
+  authSigninRoute: typeof authSigninRoute
+  authSignupRoute: typeof authSignupRoute
   skeletonNocodeRoute: typeof skeletonNocodeRoute
   skeletonOverviewRoute: typeof skeletonOverviewRoute
   skeletonProfilesettingsRoute: typeof skeletonProfilesettingsRoute
@@ -224,10 +303,14 @@ export interface RootRouteChildren {
   skeletonProjectsettingsRoute: typeof skeletonProjectsettingsRoute
   skeletonTeamactivityRoute: typeof skeletonTeamactivityRoute
   skeletonTeamsettingsRoute: typeof skeletonTeamsettingsRoute
+  authResetPasswordTokenRoute: typeof authResetPasswordTokenRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  authForgotPasswordRoute: authForgotPasswordRoute,
+  authSigninRoute: authSigninRoute,
+  authSignupRoute: authSignupRoute,
   skeletonNocodeRoute: skeletonNocodeRoute,
   skeletonOverviewRoute: skeletonOverviewRoute,
   skeletonProfilesettingsRoute: skeletonProfilesettingsRoute,
@@ -236,6 +319,7 @@ const rootRouteChildren: RootRouteChildren = {
   skeletonProjectsettingsRoute: skeletonProjectsettingsRoute,
   skeletonTeamactivityRoute: skeletonTeamactivityRoute,
   skeletonTeamsettingsRoute: skeletonTeamsettingsRoute,
+  authResetPasswordTokenRoute: authResetPasswordTokenRoute,
 }
 
 export const routeTree = rootRoute
@@ -251,6 +335,9 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/forgot-password",
+        "/signin",
+        "/signup",
         "/nocode",
         "/overview",
         "/profile_settings",
@@ -258,11 +345,21 @@ export const routeTree = rootRoute
         "/project_activity",
         "/project_settings",
         "/team_activity",
-        "/team_settings"
+        "/team_settings",
+        "/reset-password/$token"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/forgot-password": {
+      "filePath": "(auth)/forgot-password.tsx"
+    },
+    "/signin": {
+      "filePath": "(auth)/signin.tsx"
+    },
+    "/signup": {
+      "filePath": "(auth)/signup.tsx"
     },
     "/nocode": {
       "filePath": "(skeleton)/nocode.tsx"
@@ -287,6 +384,9 @@ export const routeTree = rootRoute
     },
     "/team_settings": {
       "filePath": "(skeleton)/team_settings.tsx"
+    },
+    "/reset-password/$token": {
+      "filePath": "(auth)/reset-password.$token.tsx"
     }
   }
 }
