@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { z } from "zod";
+import { string, z } from "zod";
 
 import { usePocketBase } from ".";
 
@@ -33,18 +33,16 @@ export type User = z.infer<typeof UserSchema>;
 export const useAuth = () => {
   const pb = usePocketBase();
 
-  const user = React.useSyncExternalStore(
-    (callback) => () => {
-      pb.authStore.onChange(callback);
-    },
-    () => UserSchema.nullable().parse(pb.authStore.model),
-  );
+  const [user, setUser] = React.useState<User | null>(null);
+  const [token, setToken] = React.useState<string>("");
 
-  const token = React.useSyncExternalStore(
-    (callback) => () => {
-      pb.authStore.onChange(callback);
-    },
-    () => UserSchema.nullable().parse(pb.authStore.token),
+  React.useEffect(
+    () =>
+      pb.authStore.onChange(() => {
+        setUser(UserSchema.nullable().parse(pb.authStore.model));
+        setToken(pb.authStore.token);
+      }),
+    [],
   );
 
   const login = ({ email, password }: { email: string; password: string }) => {
@@ -55,15 +53,45 @@ export const useAuth = () => {
     return pb.authStore.clear();
   };
 
-  const register = async (
+  const register = (
     data: {
       email: string;
       password: string;
       repassword: string;
     } & Partial<User>,
   ) => {
+    console.log("email", data.email);
+    console.log("password", data.password);
+    console.log("repassword", data.repassword);
+    pb.collection("users").requestVerification(data.email);
     return pb.collection("users").create(data);
   };
 
-  return { user, token, login, logout, register };
+  const resetPasswordRequest = ({ email }: { email: string }) => {
+    return pb.collection("users").requestPasswordReset(email);
+  };
+
+  const confirmPasswordRequest = ({
+    password,
+    repassword,
+    token,
+  }: {
+    password: string;
+    repassword: string;
+    token: string;
+  }) => {
+    return pb
+      .collection("users")
+      .confirmPasswordReset(token, password, repassword);
+  };
+
+  return {
+    user,
+    token,
+    login,
+    logout,
+    register,
+    resetPasswordRequest,
+    confirmPasswordRequest,
+  };
 };

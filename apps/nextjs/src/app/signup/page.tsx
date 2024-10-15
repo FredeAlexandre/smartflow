@@ -36,6 +36,7 @@ export default function SignUp() {
         <p className="mt-4 text-white">Create an account to continue</p>
         <form
           onSubmit={() => {
+            console.log("ON SUBMIT");
             signup({ email, password, repassword });
           }}
           className="mt-8 w-2/4"

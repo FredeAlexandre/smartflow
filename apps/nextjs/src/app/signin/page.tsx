@@ -62,9 +62,9 @@ export default function SignIn() {
           </Button>
         </form>
         <div className="mt-4 flex w-2/4 justify-between">
-          <a href="#" className="text-white">
+          <Link href="/forgot-password" className="text-white">
             Forgot password?
-          </a>
+          </Link>
           <Link href="/signup" className="text-white">
             Create account
           </Link>
