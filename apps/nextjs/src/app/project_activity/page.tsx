@@ -13,6 +13,7 @@ import {
 
 import Navbar from "../components/navbar";
 
+// Mock data for activities
 const allActivities = [
   {
     id: 1,
@@ -58,7 +59,7 @@ const allActivities = [
   },
 ];
 
-export default function TeamActivityPage() {
+export default function ProjectActivityPage() {
   const [timeFilter, setTimeFilter] = useState("7d");
 
   const filteredActivities = useMemo(() => {
@@ -90,10 +91,9 @@ export default function TeamActivityPage() {
     <div>
       <Navbar
         links={[
-          { label: "Overview", path: "/overview" },
-          { label: "Project", path: "/project" },
-          { label: "Activity", path: "/team_activity" },
-          { label: "Settings", path: "/team_settings" },
+          { label: "Nocode", path: "/nocode" },
+          { label: "Activity", path: "/project_activity" },
+          { label: "Settings", path: "/project_settings" },
         ]}
       />
       <div className="min-h-screen bg-background">

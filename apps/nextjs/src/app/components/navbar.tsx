@@ -29,7 +29,7 @@ function SuperLink({
     <Button asChild variant="ghost" className="rounded-none">
       <Link
         href={to}
-        className={cn({ "border-b-2 border-white": pathname == to })}
+        className={cn({ "border-b-2 border-white": pathname === to })}
       >
         {children}
       </Link>
@@ -37,7 +37,11 @@ function SuperLink({
   );
 }
 
-export default function Navbar() {
+interface NavbarProps {
+  links: { label: string; path: string }[]; // Structure pour les liens
+}
+
+export default function Navbar({ links }: NavbarProps) {
   const [selectedProject, setSelectedProject] = useState("Project 1");
   const projects = ["Project 1", "Project 2", "Project 3"];
 
@@ -62,11 +66,8 @@ export default function Navbar() {
           </DropdownMenuTrigger>
           <DropdownMenuContent className="bg-white text-black">
             {projects.map((project, index) => (
-              <DropdownMenuItem
-                key={index}
-                onClick={() => setSelectedProject(project)}
-              >
-                {project}
+              <DropdownMenuItem key={index} onClick={() => setSelectedProject(project)}>
+                <Link href={"/overview"}>{project}</Link>
               </DropdownMenuItem>
             ))}
           </DropdownMenuContent>
@@ -75,10 +76,11 @@ export default function Navbar() {
 
       <div className="ml-8 flex h-20 pl-3">
         <div className="flex items-center justify-center space-x-8">
-          <SuperLink to="/overview">Overview</SuperLink>
-          <SuperLink to="/project">Project</SuperLink>
-          <SuperLink to="/team_activity">Activity</SuperLink>
-          <SuperLink to="/team_settings">Settings</SuperLink>
+          {links.map((link, index) => (
+            <SuperLink key={index} to={link.path}>
+              {link.label}
+            </SuperLink>
+          ))}
         </div>
       </div>
 
