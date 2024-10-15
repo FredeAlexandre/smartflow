@@ -4,9 +4,10 @@ const DOCKER_IMAGE_NAME = "pocketbase";
 const DOCKER_DATA_VOLUME_NAME = "pb_data";
 
 const commands = {
-  START_CONTAINER: `docker run -it --rm -v ${DOCKER_DATA_VOLUME_NAME}:/pb/pb_data -v ./pb_migrations:/pb/pb_migrations -v ./pb_hooks:/pb/pb_hooks -p 8080:8080 ${DOCKER_IMAGE_NAME}`,
+  START_CONTAINER: `docker run -t --rm -v ${DOCKER_DATA_VOLUME_NAME}:/pb/pb_data -v ./pb_migrations:/pb/pb_migrations -v ./pb_hooks:/pb/pb_hooks -p 8080:8080 ${DOCKER_IMAGE_NAME}`,
   BUILD_IMAGE: `docker build -t ${DOCKER_IMAGE_NAME} .`,
-  DELETE_IMAGE: `docker rmi ${DOCKER_IMAGE_NAME}`,
+  DELETE_IMAGE: `docker rmi -f ${DOCKER_IMAGE_NAME}`,
+  LIST_CONTAINERS: `docker ps -a -q --filter "ancestor=${DOCKER_IMAGE_NAME}"`,
   DOES_IMAGE_EXIST: `docker image inspect ${DOCKER_IMAGE_NAME}`,
   CREATE_VOLUME: `docker volume create ${DOCKER_DATA_VOLUME_NAME}`,
   DOES_VOLUME_EXIST: `docker volume inspect ${DOCKER_DATA_VOLUME_NAME}`,
@@ -52,6 +53,26 @@ function doesVolumeExist() {
   }
 }
 
+function getContainersRunningImage() {
+  return execSync(commands.LIST_CONTAINERS, { encoding: "utf-8" }).split("\n");
+}
+
+function stopContainers() {
+  const containers = getContainersRunningImage();
+
+  for (const container of containers) {
+    if (container) {
+      runCommand(`docker stop ${container}`);
+      runCommand(`docker rm ${container}`);
+    }
+  }
+}
+
+function deleteImage() {
+  stopContainers();
+  runCommand(commands.DELETE_IMAGE);
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 console.log("Running PocketBase...");
@@ -71,7 +92,7 @@ if (!doesVolumeExist()) {
 // Si l'image existe, on lance le container, sinon on la build d'abord
 if (doesImageExist()) {
   console.log("Image pocketbase exists, deleting...");
-  runCommand(commands.DELETE_IMAGE)
+  deleteImage();
 }
 
 console.log("Building image...");
@@ -82,5 +103,5 @@ runCommand(commands.START_CONTAINER);
 // On process exit delete the image
 process.on("exit", () => {
   console.log("Deleting image...");
-  runCommand(commands.DELETE_IMAGE);
+  deleteImage();
 });

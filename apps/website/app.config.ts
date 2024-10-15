@@ -7,7 +7,7 @@ export default defineConfig({
     preset: "node-server",
   },
   vite: {
-    plugins: () => [
+    plugins: [
       viteTsConfigPaths({
         projects: ["./tsconfig.json"],
       }),
