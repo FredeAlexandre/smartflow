@@ -58,12 +58,12 @@ export const useAuth = () => {
     data: {
       email: string;
       password: string;
-      repassword: string;
+      passwordConfirm: string;
     } & Partial<User>,
   ) => {
     console.log("email", data.email);
     console.log("password", data.password);
-    console.log("repassword", data.repassword);
+    console.log("repassword", data.passwordConfirm);
     pb.collection("users").requestVerification(data.email);
     return pb.collection("users").create(data);
   };

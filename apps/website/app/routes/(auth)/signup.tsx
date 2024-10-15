@@ -15,7 +15,7 @@ import { useAuth } from "~/hooks/pocketbase/use-auth";
 export default function SignUp() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [repassword, setRepassword] = useState<string>("");
+  const [passwordConfirm, setPasswordConfirm] = useState<string>("");
   const navigate = useNavigate({ from: "/signup" });
   const { register } = useAuth();
 
@@ -38,9 +38,10 @@ export default function SignUp() {
         <h1 className="font-bold text-7xl text-white">Sign Up</h1>
         <p className="mt-4 text-white">Create an account to continue</p>
         <form
-          onSubmit={() => {
+          onSubmit={(e) => {
+            e.preventDefault();
             console.log("ON SUBMIT");
-            signup({ email, password, repassword });
+            signup({ email, password, passwordConfirm });
           }}
           className="mt-8 w-2/4"
         >
@@ -63,8 +64,8 @@ export default function SignUp() {
           <input
             type="password"
             placeholder="Confirm Password"
-            value={repassword}
-            onChange={(e) => setRepassword(e.target.value)}
+            value={passwordConfirm}
+            onChange={(e) => setPasswordConfirm(e.target.value)}
             className="mt-4 h-12 w-full border border-[#2c2c2c] bg-[#2c2c2c] px-4 text-white"
             required
           />
