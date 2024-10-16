@@ -5,6 +5,8 @@ import { Body, Head, Html, Meta, Scripts } from "@tanstack/start";
 import PocketBase from "pocketbase";
 import type * as React from "react";
 
+import { Toaster } from "~/components/ui/sonner";
+
 import { PocketBaseProvider } from "~/hooks/pocketbase/use-pocketbase";
 
 // @ts-expect-error
@@ -55,6 +57,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </Head>
       <Body>
         {children}
+        <Toaster />
         <ScrollRestoration />
         <Scripts />
       </Body>
