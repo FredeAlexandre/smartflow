@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 import Navbar from "~/components/navbar";
+import { NoCodeExample } from "~/components/no-code-example";
 
 export const Route = createFileRoute("/(skeleton)/nocode")({
   component: Nocode,
@@ -16,7 +17,7 @@ function Nocode() {
           { label: "Settings", path: "/project_settings" },
         ]}
       />
-      <h1>Aller leandre il faut bosser maintenant</h1>
+      <NoCodeExample />
     </div>
   );
 }
