@@ -1,22 +1,25 @@
-import { FC } from "react";
+import React from "react";
 import { useDroppable } from "@dnd-kit/core";
 
-interface IDroppable {
-  items: string[];
+interface DroppableProps {
+  children: React.ReactNode;
 }
 
-const Droppable: FC<IDroppable> = (props) => {
-  const { setNodeRef } = useDroppable({
-    id: "droppable",
-  });
-
-  return (
-    <ul ref={setNodeRef}>
-      {props.items.map((item, idx) => (
-        <div key={`${item}-${idx}`}>{item}</div>
-      ))}
-    </ul>
-  );
+const CustomStyle: React.CSSProperties = {
+  display: "flex",
 };
 
-export default Droppable;
+export function Droppable({ children }: DroppableProps) {
+  const { isOver, setNodeRef } = useDroppable({
+    id: "droppable",
+  });
+  const style = {
+    color: isOver ? "green" : undefined,
+  };
+
+  return (
+    <div ref={setNodeRef} style={{ ...style, ...CustomStyle }}>
+      {children}
+    </div>
+  );
+}

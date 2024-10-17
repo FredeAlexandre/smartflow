@@ -1,28 +1,35 @@
-import { FC } from "react";
+import React from "react";
 import { useDraggable } from "@dnd-kit/core";
-import { CSS } from "@dnd-kit/utilities";
 
-interface IDraggable {
-  children: string;
+interface DraggableProps {
+  id: string;
+  content: React.ReactNode;
+  styles?: React.CSSProperties;
 }
 
-const Draggable: FC<IDraggable> = (props) => {
+const CustomStyle =
+  "flex absolute justify-center w-48 h-12 border-2 border-white place-items-center rounded-lg"; // Tailwind classes
+
+export function Draggable({ id, content, styles }: DraggableProps) {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
-    id: props.children,
-    data: { title: props.children },
+    id,
   });
+
+  const style = transform
+    ? {
+        transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+      }
+    : {};
 
   return (
     <div
       ref={setNodeRef}
-      className="my-4 flex h-16 place-items-center justify-center rounded-md border-2 border-white"
-      style={{ transform: CSS.Translate.toString(transform) }}
-      {...attributes}
+      style={{ ...style, ...styles }}
+      className={CustomStyle}
       {...listeners}
+      {...attributes}
     >
-      {props.children}
+      {content}
     </div>
   );
-};
-
-export default Draggable;
+}
