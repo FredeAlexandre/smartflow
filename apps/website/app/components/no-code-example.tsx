@@ -5,7 +5,9 @@ import {
   type DragEndEvent,
   type DragStartEvent,
 } from "@dnd-kit/core";
+import { SortableContext } from "@dnd-kit/sortable";
 import React, { useState } from "react";
+import { Button } from "./ui/button";
 
 import { Draggable } from "./draggable";
 import { Droppable } from "./droppable";
@@ -13,50 +15,38 @@ import { Droppable } from "./droppable";
 const initialNotes = [
   {
     id: "1",
-    content: "If",
-    position: {
-      x: 20,
-      y: 20,
-    },
+    content: "New Contract",
     clonable: true,
+    position: {
+      x: 0,
+      y: 0,
+    },
   },
   {
     id: "2",
-    content: "Else",
-    position: {
-      x: 20,
-      y: 80,
-    },
+    content: "New Function",
     clonable: true,
-  },
-  {
-    id: "3",
-    content: "While",
     position: {
-      x: 20,
-      y: 140,
+      x: 0,
+      y: 0,
     },
-    clonable: true,
   },
 ];
 
 export function NoCodeExample() {
-  const [notes, setNotes] = useState(initialNotes);
+  const [notes, setNotes] = useState<
+    Array<{
+      id: string;
+      content: string;
+      position: { x: number; y: number };
+      clonable: boolean;
+    }>
+  >([]);
 
   // Clone a note when drag starts
   function handleDragStart(ev: DragStartEvent) {
     const { active } = ev;
     const note = notes.find((n) => n.id === active.id);
-    if (note && note.clonable === true) {
-      // Create a new note with the same properties
-      note.clonable = false;
-      const newNote = {
-        ...note,
-        id: `${note.id}-${Date.now()}`, // Generate a unique ID for the cloned note
-        clonable: true,
-      };
-      setNotes((prevNotes) => [...prevNotes, newNote]); // Add the cloned note to the notes array
-    }
   }
 
   // Update position of the dragged note
@@ -82,21 +72,42 @@ export function NoCodeExample() {
   }
 
   return (
-    <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-      <Droppable>
-        {notes.map((note) => (
-          <Draggable
-            styles={{
-              textAlign: "center",
-              left: `${note.position.x}px`,
-              top: `${note.position.y}px`,
-            }}
+    <div className="flex w-screen flex-row">
+      <div className="flex grid w-1/6 grid-cols-1 justify-center gap-4">
+        {initialNotes.map((note) => (
+          <Button
             key={note.id}
-            id={note.id}
-            content={note.content}
-          />
+            className="mx-4"
+            onClick={() => {
+              const newNote = {
+                content: note.content,
+                id: `${note.id}-${Date.now()}`,
+                clonable: true,
+                position: note.position,
+              };
+              setNotes((prevNotes) => [...prevNotes, newNote]);
+            }}
+          >
+            {note.content}
+          </Button>
         ))}
-      </Droppable>
-    </DndContext>
+      </div>
+      <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+        <div className="flew mx-4 w-full justify-center border-2 border-white">
+          <Droppable>
+            {notes.map((note) => (
+              <Draggable
+                styles={{
+                  textAlign: "center",
+                }}
+                key={note.id}
+                id={note.id}
+                content={note.content}
+              />
+            ))}
+          </Droppable>
+        </div>
+      </DndContext>
+    </div>
   );
 }
