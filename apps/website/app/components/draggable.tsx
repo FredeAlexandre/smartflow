@@ -7,9 +7,6 @@ interface DraggableProps {
   styles?: React.CSSProperties;
 }
 
-const CustomStyle =
-  "flex absolute justify-center w-48 h-12 border-2 border-white place-items-center rounded-lg"; // Tailwind classes
-
 export function Draggable({ id, content, styles }: DraggableProps) {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id,
@@ -25,7 +22,7 @@ export function Draggable({ id, content, styles }: DraggableProps) {
     <div
       ref={setNodeRef}
       style={{ ...style, ...styles }}
-      className={CustomStyle}
+      className="flex h-12 w-48 place-items-center justify-center rounded-lg border-2 border-white"
       {...listeners}
       {...attributes}
     >

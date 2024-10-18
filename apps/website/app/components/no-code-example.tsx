@@ -54,6 +54,10 @@ export function NoCodeExample() {
     const { active, delta } = ev;
     const note = notes.find((n) => n.id === active.id);
 
+    console.log(note);
+    console.log(delta.x);
+    console.log(delta.y);
+
     if (!note) return;
 
     // Update the note's position based on the drag delta
