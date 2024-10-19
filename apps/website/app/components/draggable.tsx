@@ -20,9 +20,10 @@ export function Draggable({ id, content, styles }: DraggableProps) {
 
   return (
     <div
+      id={id}
       ref={setNodeRef}
       style={{ ...style, ...styles }}
-      className="flex h-12 w-48 place-items-center justify-center rounded-lg border-2 border-white"
+      className="flex h-12 w-48 place-items-center justify-center rounded-lg bg-white font-medium text-black text-sm"
       {...listeners}
       {...attributes}
     >

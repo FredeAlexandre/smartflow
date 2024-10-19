@@ -5,18 +5,24 @@ import {
   type DragEndEvent,
   type DragStartEvent,
 } from "@dnd-kit/core";
-import { SortableContext } from "@dnd-kit/sortable";
-import React, { useState } from "react";
-import { Button } from "./ui/button";
-
+import React, { useState, useRef, useEffect } from "react";
 import { Draggable } from "./draggable";
 import { Droppable } from "./droppable";
+import { Button } from "./ui/button";
+
+interface Note {
+  id: string;
+  content: string;
+  position: {
+    x: number;
+    y: number;
+  };
+}
 
 const initialNotes = [
   {
     id: "1",
-    content: "New Contract",
-    clonable: true,
+    content: "Contract",
     position: {
       x: 0,
       y: 0,
@@ -24,8 +30,15 @@ const initialNotes = [
   },
   {
     id: "2",
-    content: "New Function",
-    clonable: true,
+    content: "Function",
+    position: {
+      x: 0,
+      y: 0,
+    },
+  },
+  {
+    id: "3",
+    content: "Variable",
     position: {
       x: 0,
       y: 0,
@@ -43,6 +56,8 @@ export function NoCodeExample() {
     }>
   >([]);
 
+  const droppableRef = useRef<HTMLDivElement | null>(null); // Reference to the droppable container
+
   // Clone a note when drag starts
   function handleDragStart(ev: DragStartEvent) {
     const { active } = ev;
@@ -54,55 +69,95 @@ export function NoCodeExample() {
     const { active, delta } = ev;
     const note = notes.find((n) => n.id === active.id);
 
-    console.log(note);
-    console.log(delta.x);
-    console.log(delta.y);
+    if (!note || !droppableRef.current) return;
 
-    if (!note) return;
-
-    // Update the note's position based on the drag delta
-    const updatedNote = {
-      ...note,
-      position: {
-        x: note.position.x + delta.x,
-        y: note.position.y + delta.y,
-      },
+    // Calculate the new position of the note after the drag
+    const newPosition = {
+      x: note.position.x + delta.x,
+      y: note.position.y + delta.y,
     };
 
-    // Update the notes state
-    setNotes((prevNotes) =>
-      prevNotes.map((n) => (n.id === updatedNote.id ? updatedNote : n)),
-    );
+    // Get the bounding box of the droppable element
+    const droppableRect = droppableRef.current.getBoundingClientRect();
+
+    // Calculate the size of the draggable element (assuming a consistent size)
+    const draggableElement = document.getElementById(note.id);
+    console.log(note.id);
+    const draggableRect = draggableElement?.getBoundingClientRect();
+
+    // Check if the draggable is fully inside the droppable area
+    if (
+      draggableRect &&
+      newPosition.x >= droppableRect.left &&
+      newPosition.x + draggableRect.width <= droppableRect.right &&
+      newPosition.y >= droppableRect.top &&
+      newPosition.y + draggableRect.height <= droppableRect.bottom
+    ) {
+      // If fully inside, update the note's position
+      const updatedNote = {
+        ...note,
+        position: newPosition,
+      };
+
+      // Update the notes state
+      setNotes((prevNotes) =>
+        prevNotes.map((n) => (n.id === updatedNote.id ? updatedNote : n)),
+      );
+    } else {
+      console.log("Drag canceled: not fully inside droppable area.");
+    }
+  }
+
+  // Function to add a new note at the center of the droppable container
+  function handleButtonClick(note: Note) {
+    if (droppableRef.current) {
+      const droppableRect = droppableRef.current.getBoundingClientRect();
+
+      // Calculate the center of the droppable area
+      const centerX = droppableRect.left + 25;
+      const centerY = droppableRect.top + 25;
+
+      const newNote = {
+        content: note.content,
+        id: `${note.id}-${Date.now()}`,
+        clonable: true,
+        // Set the initial position of the new note to the center of the droppable container
+        position: {
+          x: centerX,
+          y: centerY,
+        },
+      };
+
+      setNotes((prevNotes) => [...prevNotes, newNote]);
+    }
   }
 
   return (
     <div className="flex w-screen flex-row">
-      <div className="flex grid w-1/6 grid-cols-1 justify-center gap-4">
+      <div className="flex w-1/6 flex-col justify-center gap-4">
         {initialNotes.map((note) => (
           <Button
             key={note.id}
             className="mx-4"
-            onClick={() => {
-              const newNote = {
-                content: note.content,
-                id: `${note.id}-${Date.now()}`,
-                clonable: true,
-                position: note.position,
-              };
-              setNotes((prevNotes) => [...prevNotes, newNote]);
-            }}
+            onClick={() => handleButtonClick(note)}
           >
             {note.content}
           </Button>
         ))}
       </div>
       <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-        <div className="flew mx-4 w-full justify-center border-2 border-white">
+        <div
+          ref={droppableRef}
+          className="mx-4 h-screen w-full justify-center border-2 border-white"
+        >
           <Droppable>
             {notes.map((note) => (
               <Draggable
                 styles={{
                   textAlign: "center",
+                  left: `${note.position.x}px`,
+                  top: `${note.position.y}px`,
+                  position: "absolute", // Make sure the note has absolute positioning
                 }}
                 key={note.id}
                 id={note.id}
