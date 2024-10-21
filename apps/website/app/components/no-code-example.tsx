@@ -7,6 +7,8 @@ import {
 } from "@dnd-kit/core";
 import React, { useState, useRef, useEffect } from "react";
 import { Draggable } from "./draggable";
+import { DraggableContract } from "./draggableContract";
+import { DraggableFunction } from "./draggableFunction";
 import { Droppable } from "./droppable";
 import { Button } from "./ui/button";
 
@@ -151,19 +153,29 @@ export function NoCodeExample() {
           className="mx-4 h-screen w-full justify-center border-2 border-white"
         >
           <Droppable>
-            {notes.map((note) => (
-              <Draggable
-                styles={{
-                  textAlign: "center",
-                  left: `${note.position.x}px`,
-                  top: `${note.position.y}px`,
-                  position: "absolute", // Make sure the note has absolute positioning
-                }}
-                key={note.id}
-                id={note.id}
-                content={note.content}
-              />
-            ))}
+            {notes.map((note) => {
+              const DraggableComponent =
+                note.content === "Contract"
+                  ? DraggableContract
+                  : note.content === "Function"
+                    ? DraggableFunction
+                    : // Assurez-vous que DraggableFunction est défini
+                      Draggable;
+
+              return (
+                <DraggableComponent
+                  styles={{
+                    textAlign: "center",
+                    left: `${note.position.x}px`,
+                    top: `${note.position.y}px`,
+                    position: "absolute", // Assurez-vous que la note a un positionnement absolu
+                  }}
+                  key={note.id}
+                  id={note.id}
+                  content={note.content}
+                />
+              );
+            })}
           </Droppable>
         </div>
       </DndContext>
