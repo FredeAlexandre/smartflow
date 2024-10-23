@@ -58,7 +58,7 @@ describe("Deployer contract", () => {
       const { deployer, addr1, addr2 } = await loadFixture(deployDeployerContractFixture);
 
       await expect(
-        deployer.write.authorize([addr2.account.address], { client: { wallet: addr1 }}),
+        deployer.write.authorize([addr2.account.address], { account: addr1.account }),
       ).to.be.rejectedWith("Not authorized");
     });
   });
@@ -73,7 +73,7 @@ describe("Deployer contract", () => {
 
       const bytecode =
         "0x6080604052348015600f57600080fd5b5060a08061001d6000396000f3fe60806040526004361060495760003560e01c806369fe0e2d14604e575b600080fd5b605460048036036020811015606257600080fd5b50356074565b005b67016345785d8a000081565b600080fd5b67016345785d8a00008256fea2646970667358221220a2a4023f32a23cf5fc07203e4384492de8b1ff7b6229f89f9117bb2deff7841664736f6c63430008070033";
-      const tx = await deployer.write.deploy([bytecode], { client: { wallet: addr1 } });
+      const tx = await deployer.write.deploy([bytecode], { account: addr1.account });
       const receipt = await publicClient.waitForTransactionReceipt({ hash: tx });
 
       const deployedAddress = receipt.logs[0].address;
@@ -87,7 +87,7 @@ describe("Deployer contract", () => {
         "0x6080604052348015600f57600080fd5b5060a08061001d6000396000f3fe60806040526004361060495760003560e01c806369fe0e2d14604e575b600080fd5b605460048036036020811015606257600080fd5b50356074565b005b67016345785d8a000081565b600080fd5b67016345785d8a00008256fea2646970667358221220a2a4023f32a23cf5fc07203e4384492de8b1ff7b6229f89f9117bb2deff7841664736f6c63430008070033";
 
       await expect(
-        deployer.write.deploy([bytecode], { client: { wallet: addr2 } }),
+        deployer.write.deploy([bytecode], { account: addr2.account }),
       ).to.be.rejectedWith("Unauthorized deployer");
     });
   });
